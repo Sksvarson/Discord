@@ -3,9 +3,11 @@
     padding: 0;
     box-sizing: border-box;
 }
+html, body {
+  overflow-y: hidden;
+  height: 100%;
+}
 body{
-  height: 90vh;
-  overflow-y: hidden !important;
   /* background-image: repeating-linear-gradient(
     45deg,
     #f8f8f8,
