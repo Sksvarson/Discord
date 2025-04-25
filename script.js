@@ -185,4 +185,15 @@ document.querySelector('.skibidi').addEventListener('click', ()=>{
 }, 4000);
 })
 
+navigator.serviceWorker.register('sw.js')
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js')
+      .then(function(registration) {
+        console.log('ServiceWorker zarejestrowany:', registration.scope);
+      }, function(err) {
+        console.log('Błąd rejestracji ServiceWorker:', err);
+      });
+  });
+}
