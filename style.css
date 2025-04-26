@@ -251,7 +251,7 @@ h1 {
   
   .second .chip {
     background-color: #ffffff;
-/*     box-shadow: 0 0 5px rgba(255, 0, 0, 0.152); */
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.152);
     border-radius: 20px;
     padding: 8px 14px;
     font-size: 14px;
