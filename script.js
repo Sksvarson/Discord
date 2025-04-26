@@ -162,10 +162,8 @@ const interests = [
   
 
   // Przyciski
-const nextButton = document.createElement("button");
-nextButton.classList.add("nextButton");
+const nextButton = document.querySelector(".nextButton");
 nextButton.textContent = "Idź dalej";
-document.querySelector(".second").appendChild(nextButton);
 
 nextButton.addEventListener('click', ()=>{
   document.querySelector('.second').style.display = "none";
