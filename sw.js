@@ -1,3 +1,6 @@
+self.addEventListener("install", (e) => {
+  self.skipWaiting(); // 🔥 zaktualizuj od razu, nie czekaj
+});
 self.addEventListener("install", e => {
   e.waitUntil(
     caches.open("static").then(cache => {
@@ -20,3 +23,5 @@ self.addEventListener("fetch", e => {
     })
   );
 });
+
+
