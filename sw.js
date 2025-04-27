@@ -1,4 +1,4 @@
-const CACHE_NAME = "static-v6"; // <<--- zmieniaj numer przy każdej nowej wersji
+const CACHE_NAME = "static-v7"; // <<--- zmieniaj numer przy każdej nowej wersji
 const FILES_TO_CACHE = [
   "index.html",
   "style.css",
