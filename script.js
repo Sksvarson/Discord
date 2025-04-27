@@ -6,12 +6,12 @@ let uartTX;
 document.getElementById('connectButton').addEventListener('click', async () => {
   try {
     bluetoothDevice = await navigator.bluetooth.requestDevice({
-      filters: [{ services: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e'] }] // UUID usługi UART
+      filters: [{ services: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e'] }]
     });
 
     bluetoothServer = await bluetoothDevice.gatt.connect();
     uartService = await bluetoothServer.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e');
-    uartTX = await uartService.getCharacteristic('6e400002-b5a3-f393-e0a9-e50e24dcca9e'); // TX = wysyłanie
+    uartTX = await uartService.getCharacteristic('6e400002-b5a3-f393-e0a9-e50e24dcca9e');
 
     alert('Połączono!');
   } catch (error) {
@@ -30,6 +30,11 @@ async function sendData(text) {
   await uartTX.writeValue(encoder.encode(text));
 }
 
+// Obsługa kliknięcia "Wyślij wiadomość"
+document.getElementById('sendButton').addEventListener('click', () => {
+  const text = document.getElementById('messageInput').value;
+  sendData(text);
+});
 
 
 const btn1 = document.querySelector('ul .button')
