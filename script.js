@@ -1,3 +1,37 @@
+let bluetoothDevice;
+let bluetoothServer;
+let uartService;
+let uartTX;
+
+document.getElementById('connectButton').addEventListener('click', async () => {
+  try {
+    bluetoothDevice = await navigator.bluetooth.requestDevice({
+      filters: [{ services: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e'] }] // UUID usługi UART
+    });
+
+    bluetoothServer = await bluetoothDevice.gatt.connect();
+    uartService = await bluetoothServer.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e');
+    uartTX = await uartService.getCharacteristic('6e400002-b5a3-f393-e0a9-e50e24dcca9e'); // TX = wysyłanie
+
+    alert('Połączono!');
+  } catch (error) {
+    console.error('Błąd połączenia:', error);
+    alert('Nie udało się połączyć.');
+  }
+});
+
+// Funkcja do wysyłania tekstu
+async function sendData(text) {
+  if (!uartTX) {
+    alert('Najpierw połącz się z opaską!');
+    return;
+  }
+  const encoder = new TextEncoder();
+  await uartTX.writeValue(encoder.encode(text));
+}
+
+
+
 const btn1 = document.querySelector('ul .button')
 
 btn1.addEventListener('click', ()=>{
