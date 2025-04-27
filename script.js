@@ -3,6 +3,7 @@ let bluetoothServer;
 let uartService;
 let uartTX;
 
+
 document.getElementById('connectButton').addEventListener('click', async () => {
   try {
     bluetoothDevice = await navigator.bluetooth.requestDevice({
@@ -20,7 +21,6 @@ document.getElementById('connectButton').addEventListener('click', async () => {
   }
 });
 
-// Funkcja do wysyłania tekstu
 async function sendData(text) {
   if (!uartTX) {
     alert('Najpierw połącz się z opaską!');
@@ -30,11 +30,17 @@ async function sendData(text) {
   await uartTX.writeValue(encoder.encode(text));
 }
 
-// Obsługa kliknięcia "Wyślij wiadomość"
-document.getElementById('sendButton').addEventListener('click', () => {
-  const text = document.getElementById('messageInput').value;
-  sendData(text);
+document.getElementById('startButton').addEventListener('click', async () => {
+  for (let i = 0; i < selectedChips.length; i++) {
+    await sendData(selectedChips[i]);
+    await delay(1500); // czekaj 1.5 sekundy między wysyłkami
+  }
 });
+
+// funkcja pomocnicza do czekania
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 const btn1 = document.querySelector('ul .button')
